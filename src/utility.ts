@@ -3,7 +3,7 @@ import { validCommands, commandLimits } from "./data/tello-data.json";
 import { ValidCommands, ValidCommandOptions } from "./types/commands.types";
 
 const limits = Object.keys(commandLimits);
-const commands = [...validCommands.control, ...validCommands.read, ...validCommands.set];
+const commands = [...validCommands.control, ...validCommands.read, ...validCommands.set, ...validCommands.led];
 
 export function verifyCommand(command: ValidCommands, options?: ValidCommandOptions): Error | void {
     assert.strictEqual(typeof command, "string");
