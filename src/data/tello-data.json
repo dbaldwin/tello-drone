@@ -39,6 +39,9 @@
             "EXT mled g",
             "EXT mled",
             "EXT mled sc"
+        ],
+        "diy": [
+            "EXT DIY"
         ]
     },
     "commandLimits": {
@@ -201,6 +204,12 @@
                 "min": 0,
                 "max": 255
             }
+        },
+        "EXT DIY": {
+            "value": [
+                "servo open",
+                "servo close"
+            ]
         }
     }
 }
