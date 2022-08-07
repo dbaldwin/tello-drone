@@ -29,7 +29,8 @@ export type ValidCommands =
     "EXT DIY" |
     "mon" |
     "moff" |
-    "mdirection";
+    "mdirection" |
+    "jump";
 export interface ValidCommandOptions {
     value?: number | string;
     x?: number;
