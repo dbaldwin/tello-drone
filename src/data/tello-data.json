@@ -31,6 +31,17 @@
             "wifi?",
             "sdk?",
             "sn?"
+        ],
+        "led": [
+            "EXT led",
+            "EXT led br",
+            "EXT led bl",
+            "EXT mled g",
+            "EXT mled",
+            "EXT mled sc"
+        ],
+        "diy": [
+            "EXT DIY"
         ]
     },
     "commandLimits": {
@@ -179,6 +190,26 @@
                 "min": -100,
                 "max": 100
             }
+        },
+        "EXT led": {
+            "r": {
+                "min": 0,
+                "max": 255
+            },
+            "g": {
+                "min": 0,
+                "max": 255
+            },
+            "b": {
+                "min": 0,
+                "max": 255
+            }
+        },
+        "EXT DIY": {
+            "value": [
+                "servo open",
+                "servo close"
+            ]
         }
     }
 }

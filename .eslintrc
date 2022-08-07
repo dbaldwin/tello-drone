@@ -33,6 +33,7 @@
         "consistent-return": "off",
         "max-len": "warn",
         "@typescript-eslint/ban-ts-ignore": "off",
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "double"
