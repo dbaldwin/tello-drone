@@ -217,6 +217,12 @@
                 "servo open",
                 "servo close"
             ]
+        },
+        "mdirection": {
+            "value": {
+                "min": 0,
+                "max": 2
+            }
         }
     }
 }
