@@ -26,7 +26,10 @@ export type ValidCommands =
     "sdk?" |
     "sn?" |
     "EXT led" |
-    "EXT DIY";
+    "EXT DIY" |
+    "mon" |
+    "moff" |
+    "mdirection";
 export interface ValidCommandOptions {
     value?: number | string;
     x?: number;

@@ -22,7 +22,10 @@
         "set": [
             "speed",
             "rc",
-            "wifi"
+            "wifi",
+            "mon",
+            "moff",
+            "mdirection"
         ],
         "read": [
             "speed?",
@@ -117,6 +120,10 @@
             "speed": {
                 "min": 10,
                 "max": 100
+            },
+            "mid": {
+                "min": 1,
+                "max": 8
             }
         },
         "curve": {

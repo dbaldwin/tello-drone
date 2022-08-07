@@ -13,6 +13,10 @@ export interface TelloDrone {
 }
 
 export interface DroneState {
+    mid: number;
+    x: number;
+    y: number;
+    z: number;
     pitch: number;
     roll: number;
     yaw: number;
