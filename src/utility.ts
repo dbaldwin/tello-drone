@@ -30,8 +30,10 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
 
         // Check if we are missing any options
         for (const option of allRequiredOptions) {
+            if (option === "mid") break;
+
             if (!givenOptionKeys.includes(option)) {
-                return new Error(`expected '${option}' in options but recieved undefined`);
+                return new Error(`expected '${option}' in options but received undefined`);
             }
         }
     }
