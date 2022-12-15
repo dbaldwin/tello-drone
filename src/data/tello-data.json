@@ -1,241 +1,217 @@
 {
-    "validCommands": {
-        "control": [
-            "command",
-            "takeoff",
-            "land",
-            "streamon",
-            "streamoff",
-            "emergency",
-            "up",
-            "down",
-            "left",
-            "right",
-            "forward",
-            "back",
-            "cw",
-            "ccw",
-            "flip",
-            "go",
-            "curve",
-            "jump"
-        ],
-        "set": [
-            "speed",
-            "rc",
-            "wifi",
-            "mon",
-            "moff",
-            "mdirection"
-        ],
-        "read": [
-            "speed?",
-            "battery?",
-            "time?",
-            "wifi?",
-            "sdk?",
-            "sn?"
-        ],
-        "led": [
-            "EXT led",
-            "EXT led br",
-            "EXT led bl",
-            "EXT mled g",
-            "EXT mled",
-            "EXT mled sc"
-        ],
-        "diy": [
-            "EXT DIY"
-        ]
+  "validCommands": {
+    "control": [
+      "command",
+      "takeoff",
+      "land",
+      "streamon",
+      "streamoff",
+      "emergency",
+      "up",
+      "down",
+      "left",
+      "right",
+      "forward",
+      "back",
+      "cw",
+      "ccw",
+      "flip",
+      "go",
+      "curve",
+      "jump"
+    ],
+    "set": ["speed", "rc", "wifi", "mon", "moff", "mdirection"],
+    "read": ["speed?", "battery?", "time?", "wifi?", "sdk?", "sn?"],
+    "led": [
+      "EXT led",
+      "EXT led br",
+      "EXT led bl",
+      "EXT mled g",
+      "EXT mled",
+      "EXT mled sc"
+    ],
+    "diy": ["EXT DIY"]
+  },
+  "commandLimits": {
+    "up": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
     },
-    "commandLimits": {
-        "up": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "down": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "left": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "right": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "forward": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "back": {
-            "value": {
-                "min": 20,
-                "max": 500
-            }
-        },
-        "cw": {
-            "value": {
-                "min": 1,
-                "max": 360
-            }
-        },
-        "ccw": {
-            "value": {
-                "min": 1,
-                "max": 360
-            }
-        },
-        "flip": {
-            "value": [
-                "l",
-                "r",
-                "f",
-                "b"
-            ]
-        },
-        "go": {
-            "x": {
-                "min": -500,
-                "max": 500
-            },
-            "y": {
-                "min": -500,
-                "max": 500
-            },
-            "z": {
-                "min": -500,
-                "max": 500
-            },
-            "speed": {
-                "min": 10,
-                "max": 100
-            },
-            "mid": {
-                "min": 1,
-                "max": 8
-            }
-        },
-        "curve": {
-            "x1": {
-                "min": -500,
-                "max": 500
-            },
-            "y1": {
-                "min": -500,
-                "max": 500
-            },
-            "z1": {
-                "min": -500,
-                "max": 500
-            },
-            "x2": {
-                "min": -500,
-                "max": 500
-            },
-            "y2": {
-                "min": -500,
-                "max": 500
-            },
-            "z2": {
-                "min": -500,
-                "max": 500
-            },
-            "speed": {
-                "min": 10,
-                "max": 60
-            }
-        },
-        "jump": {
-            "x": {
-                "min": -500,
-                "max": 500
-            },
-            "y": {
-                "min": -500,
-                "max": 500
-            },
-            "z": {
-                "min": -500,
-                "max": 500
-            },
-            "speed": {
-                "min": 10,
-                "max": 100
-            },
-            "yaw": {
-                "min": 1,
-                "max": 360
-            },
-            "mid1": {
-                "min": 1,
-                "max": 8
-            },
-            "mid2": {
-                "min": 1,
-                "max": 8
-            }
-        },
-        "speed": {
-            "value": {
-                "min": 10,
-                "max": 100
-            }
-        },
-        "rc": {
-            "a": {
-                "min": -100,
-                "max": 100
-            },
-            "b": {
-                "min": -100,
-                "max": 100
-            },
-            "c": {
-                "min": -100,
-                "max": 100
-            },
-            "d": {
-                "min": -100,
-                "max": 100
-            }
-        },
-        "EXT led": {
-            "r": {
-                "min": 0,
-                "max": 255
-            },
-            "g": {
-                "min": 0,
-                "max": 255
-            },
-            "b": {
-                "min": 0,
-                "max": 255
-            }
-        },
-        "EXT DIY": {
-            "value": [
-                "servo open",
-                "servo close"
-            ]
-        },
-        "mdirection": {
-            "value": {
-                "min": 0,
-                "max": 2
-            }
-        }
+    "down": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
+    },
+    "left": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
+    },
+    "right": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
+    },
+    "forward": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
+    },
+    "back": {
+      "value": {
+        "min": 20,
+        "max": 500
+      }
+    },
+    "cw": {
+      "value": {
+        "min": 1,
+        "max": 360
+      }
+    },
+    "ccw": {
+      "value": {
+        "min": 1,
+        "max": 360
+      }
+    },
+    "flip": {
+      "value": ["l", "r", "f", "b"]
+    },
+    "go": {
+      "x": {
+        "min": -500,
+        "max": 500
+      },
+      "y": {
+        "min": -500,
+        "max": 500
+      },
+      "z": {
+        "min": -500,
+        "max": 500
+      },
+      "speed": {
+        "min": 10,
+        "max": 100
+      },
+      "mid": {
+        "min": 1,
+        "max": 8
+      }
+    },
+    "curve": {
+      "x1": {
+        "min": -500,
+        "max": 500
+      },
+      "y1": {
+        "min": -500,
+        "max": 500
+      },
+      "z1": {
+        "min": -500,
+        "max": 500
+      },
+      "x2": {
+        "min": -500,
+        "max": 500
+      },
+      "y2": {
+        "min": -500,
+        "max": 500
+      },
+      "z2": {
+        "min": -500,
+        "max": 500
+      },
+      "speed": {
+        "min": 10,
+        "max": 60
+      }
+    },
+    "jump": {
+      "x": {
+        "min": -500,
+        "max": 500
+      },
+      "y": {
+        "min": -500,
+        "max": 500
+      },
+      "z": {
+        "min": -500,
+        "max": 500
+      },
+      "speed": {
+        "min": 10,
+        "max": 100
+      },
+      "yaw": {
+        "min": 1,
+        "max": 360
+      },
+      "mid1": {
+        "min": 1,
+        "max": 8
+      },
+      "mid2": {
+        "min": 1,
+        "max": 8
+      }
+    },
+    "speed": {
+      "value": {
+        "min": 10,
+        "max": 100
+      }
+    },
+    "rc": {
+      "a": {
+        "min": -100,
+        "max": 100
+      },
+      "b": {
+        "min": -100,
+        "max": 100
+      },
+      "c": {
+        "min": -100,
+        "max": 100
+      },
+      "d": {
+        "min": -100,
+        "max": 100
+      }
+    },
+    "EXT led": {
+      "r": {
+        "min": 0,
+        "max": 255
+      },
+      "g": {
+        "min": 0,
+        "max": 255
+      },
+      "b": {
+        "min": 0,
+        "max": 255
+      }
+    },
+    "EXT DIY": {
+      "value": ["servo open", "servo close"]
+    },
+    "mdirection": {
+      "value": {
+        "min": 0,
+        "max": 2
+      }
     }
+  }
 }
