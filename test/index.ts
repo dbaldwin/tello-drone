@@ -24,7 +24,7 @@ describe("tello-drone library", function () {
     it("Can verify valid commands", function () {
         const noOptionCommands = ["command", "takeoff", "land", "streamon"];
         const optionCommands = ["jump", "go", "up", "down", "ccw", "flip", "curve", "EXT led", "EXT DIY", "mdirection", "mon", "moff"];
-        const options = [{ x: 20, y: 20, z: 20, speed: 50, yaw: 90, mid1: 1, mid2: 5 }, { x: 100, y: 100, z: 100, speed: 50, mid: 3 }, { value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, z1: 100, x2: 100, y2: 50, z2: 50, speed: 30 }, { r: 199, g: 255, b: 10 }, { value: "servo open" }, { value: 2 }];
+        const options = [{ x: 20, y: 20, z: 20, speed: 50, yaw: 90, mid1: "m1", mid2: "m5" }, { x: 100, y: 100, z: 100, speed: 50, mid: 3 }, { value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, z1: 100, x2: 100, y2: 50, z2: 50, speed: 30 }, { r: 199, g: 255, b: 10 }, { value: "servo open" }, { value: 2 }];
 
         for (const command of noOptionCommands) {
             assert.equal(verifyCommand(command as ValidCommands), undefined);
