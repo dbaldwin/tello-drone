@@ -5,114 +5,120 @@ import { ValidCommandOptions, ValidCommands } from "./types/commands.types";
 import { DroneEventEmitter, DroneOptions } from "./types/drone.types";
 
 class Drone {
-    HOST: string;
-    MAIN_PORT: number;
-    STATE_PORT: number;
-    droneIO: dgram.Socket;
-    droneState: dgram.Socket;
-    connected: boolean;
-    events: EventEmitter;
+  HOST: string;
+  MAIN_PORT: number;
+  STATE_PORT: number;
+  droneIO: dgram.Socket;
+  droneState: dgram.Socket;
+  connected: boolean;
+  events: EventEmitter;
 
-    constructor(options?: DroneOptions) {
-        /*
+  constructor(options?: DroneOptions) {
+    /*
             Leaving these asserts out for now, since changing the ports from string to number
             as per following the dgram docs, it will cause errors. Right now the goal is to port JS to TS
             and not fix bugs. Will be added in 3.1.x release.
         */
-        // assert.equal(typeof options.host, "string");
-        // assert.equal(typeof options.port, "number");
-        // assert.equal(typeof options.statePort, "number");
-        // assert.equal(typeof options.skipOk, "boolean");
+    // assert.equal(typeof options.host, "string");
+    // assert.equal(typeof options.port, "number");
+    // assert.equal(typeof options.statePort, "number");
+    // assert.equal(typeof options.skipOk, "boolean");
 
-        const defaultOptions = {
-            host: "192.168.10.1",
-            port: 8889,
-            statePort: 8890,
-            skipOk: true,
-        };
-        const {
-            host, port, statePort, skipOk,
-        } = { ...defaultOptions, ...options };
+    const defaultOptions = {
+      host: "192.168.10.1",
+      port: 8889,
+      statePort: 8890,
+      skipOk: true,
+    };
+    const { host, port, statePort, skipOk } = { ...defaultOptions, ...options };
 
-        this.HOST = host;
-        this.MAIN_PORT = port;
-        this.STATE_PORT = statePort;
+    this.HOST = host;
+    this.MAIN_PORT = port;
+    this.STATE_PORT = statePort;
 
-        this.droneIO = dgram.createSocket("udp4");
-        this.droneState = dgram.createSocket("udp4");
+    this.droneIO = dgram.createSocket("udp4");
+    this.droneState = dgram.createSocket("udp4");
 
-        this.droneIO.bind(this.MAIN_PORT);
-        this.droneState.bind(this.STATE_PORT);
+    this.droneIO.bind(this.MAIN_PORT);
+    this.droneState.bind(this.STATE_PORT);
 
-        this.connected = false;
+    this.connected = false;
 
-        this.events = new EventEmitter();
+    this.events = new EventEmitter();
 
-        this.droneState.on("message", stateBuffer => {
-            this.events.emit("state", parseDroneState(stateBuffer));
-        });
+    this.droneState.on("message", (stateBuffer) => {
+      this.events.emit("state", parseDroneState(stateBuffer));
+    });
 
-        this.droneIO.on("message", (...args) => {
-            const [messageBuffer] = args;
-            const parsedMessage = Buffer.isBuffer(messageBuffer) ? messageBuffer.toString() : messageBuffer;
+    this.droneIO.on("message", (...args) => {
+      const [messageBuffer] = args;
+      const parsedMessage = Buffer.isBuffer(messageBuffer)
+        ? messageBuffer.toString()
+        : messageBuffer;
 
-            if (parsedMessage !== "ok") {
-                return this.events.emit("message", parsedMessage);
-            }
+      console.log(`got message ${parsedMessage}`);
 
-            this.events.emit("_ok");
+      if (parsedMessage !== "ok" && parsedMessage !== "led ok") {
+        return this.events.emit("message", parsedMessage);
+      }
 
-            if (!this.connected) {
-                this.connected = true;
-                this.events.emit("connection");
-            }
+      this.events.emit("_ok");
 
-            if (!skipOk) this.events.emit("message", parsedMessage);
-        });
+      if (!this.connected) {
+        this.connected = true;
+        this.events.emit("connection");
+      }
 
-        // Add a minor delay so that the events can be attached first
-        setTimeout(() => this.send("command"));
+      if (!skipOk) this.events.emit("message", parsedMessage);
+    });
+
+    // Add a minor delay so that the events can be attached first
+    setTimeout(() => this.send("command"));
+  }
+
+  send(
+    command: ValidCommands,
+    options?: ValidCommandOptions,
+    force = false
+  ): Promise<void> {
+    const error = verifyCommand(command, options);
+    let formattedCommand: string = command;
+
+    if (options) {
+      formattedCommand = formatCommand(command, options);
     }
 
-    send(command: ValidCommands, options?: ValidCommandOptions, force = false): Promise<void> {
-        const error = verifyCommand(command, options);
-        let formattedCommand: string = command;
+    return new Promise((resolve, reject) => {
+      if (error && !force) return reject(error);
 
-        if (options) {
-            formattedCommand = formatCommand(command, options);
-        }
+      this.droneIO.send(
+        formattedCommand,
+        0,
+        formattedCommand.length,
+        this.MAIN_PORT,
+        this.HOST,
+        this.events.emit.bind(this.events, "send")
+      );
 
-        return new Promise((resolve, reject) => {
-            if (error && !force) return reject(error);
+      // I need to really double check this below, but i will not change it for now since im only porting to TS
 
-            this.droneIO.send(
-                formattedCommand,
-                0,
-                formattedCommand.length,
-                this.MAIN_PORT,
-                this.HOST,
-                this.events.emit.bind(this.events, "send"),
-            );
+      // If the command is a read command resolve immediately
+      if (formattedCommand.includes("?")) {
+        return resolve();
+      }
 
-            // I need to really double check this below, but i will not change it for now since im only porting to TS
+      // otherwise wait for OK from drone
+      this.events.once("_ok", resolve);
+    });
+  }
 
-            // If the command is a read command resolve immediately
-            if (formattedCommand.includes("?")) {
-                return resolve();
-            }
+  forceSend(command: ValidCommands, options: ValidCommandOptions) {
+    return this.send.call(this, command, options, true);
+  }
 
-            // otherwise wait for OK from drone
-            this.events.once("_ok", resolve);
-        });
-    }
-
-    forceSend(command: ValidCommands, options: ValidCommandOptions) {
-        return this.send.call(this, command, options, true);
-    }
-
-    on: DroneEventEmitter = (event, callback) => {
-        this.events.on(event, callback);
-    }
+  on: DroneEventEmitter = (event, callback) => {
+    this.events.on(event, callback);
+  };
 }
 
 export = Drone;
