@@ -18,7 +18,9 @@
       "flip",
       "go",
       "curve",
-      "jump"
+      "jump",
+      "motoron",
+      "motoroff"
     ],
     "set": ["speed", "rc", "wifi", "mon", "moff", "mdirection"],
     "read": ["speed?", "battery?", "time?", "wifi?", "sdk?", "sn?"],
