@@ -24,14 +24,7 @@
     ],
     "set": ["speed", "rc", "wifi", "mon", "moff", "mdirection"],
     "read": ["speed?", "battery?", "time?", "wifi?", "sdk?", "sn?"],
-    "led": [
-      "EXT led",
-      "EXT led br",
-      "EXT led bl",
-      "EXT mled g",
-      "EXT mled",
-      "EXT mled sc"
-    ],
+    "led": ["EXT led", "EXT led br", "EXT led bl", "EXT mled g", "EXT mled"],
     "diy": ["EXT DIY"]
   },
   "commandLimits": {
@@ -205,6 +198,66 @@
         "min": 0,
         "max": 255
       }
+    },
+    "EXT led br": {
+      "t": {
+        "min": 0.1,
+        "max": 2.5
+      },
+      "r": {
+        "min": 0,
+        "max": 255
+      },
+      "g": {
+        "min": 0,
+        "max": 255
+      },
+      "b": {
+        "min": 0,
+        "max": 255
+      }
+    },
+    "EXT led bl": {
+      "t": {
+        "min": 0.1,
+        "max": 2.5
+      },
+      "r1": {
+        "min": 0,
+        "max": 255
+      },
+      "g1": {
+        "min": 0,
+        "max": 255
+      },
+      "b1": {
+        "min": 0,
+        "max": 255
+      },
+      "r2": {
+        "min": 0,
+        "max": 255
+      },
+      "g2": {
+        "min": 0,
+        "max": 255
+      },
+      "b2": {
+        "min": 0,
+        "max": 255
+      }
+    },
+    "EXT mled g": {
+      "value": ""
+    },
+    "EXT mled": {
+      "direction": ["l", "r", "u", "d"],
+      "color": ["r", "b", "p"],
+      "frequency": {
+        "min": 0.1,
+        "max": 2.5
+      },
+      "text": ""
     },
     "EXT DIY": {
       "value": ["servo open", "servo close"]

@@ -26,6 +26,7 @@ export type ValidCommands =
   | "sdk?"
   | "sn?"
   | "EXT led"
+  | "EXT mled"
   | "EXT DIY"
   | "mon"
   | "moff"
