@@ -58,7 +58,11 @@ class Drone {
 
       console.log(`got message ${parsedMessage}`);
 
-      if (parsedMessage !== "ok" && parsedMessage !== "led ok") {
+      if (
+        parsedMessage !== "ok" &&
+        parsedMessage !== "led ok" &&
+        parsedMessage !== "matrix ok"
+      ) {
         return this.events.emit("message", parsedMessage);
       }
 

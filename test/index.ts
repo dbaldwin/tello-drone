@@ -73,6 +73,10 @@ describe("tello-drone library", function () {
       "flip",
       "curve",
       "EXT led",
+      "EXT led br",
+      "EXT led bl",
+      "EXT mled g",
+      "EXT mled",
       "EXT DIY",
       "mdirection",
       "mon",
@@ -89,6 +93,18 @@ describe("tello-drone library", function () {
       { value: "r" },
       { x1: 250, y1: 100, z1: 100, x2: 100, y2: 50, z2: 50, speed: 30 },
       { r: 199, g: 255, b: 10 },
+      { t: 0.5, r: 0, g: 0, b: 255 },
+      { t: 2.5, r1: 0, g1: 0, b1: 255, r2: 0, g2: 255, b2: 0 },
+      {
+        value:
+          "rbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprbprpbr",
+      },
+      {
+        direction: "u",
+        color: "b",
+        frequency: 1.0,
+        text: "hello",
+      },
       { value: "servo open" },
       { value: 2 },
     ];
